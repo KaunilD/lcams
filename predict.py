@@ -14,6 +14,7 @@ import math
 import matplotlib.pyplot as plt
 import glob
 import shutil
+
 #python predict.py --params params/epoch-125.model --image
 
 EMOTIONS = ["neutral",  "happiness", "anger", "sadness"]
@@ -60,13 +61,14 @@ class Classifier(chainer.Chain):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image', type=str)
-    parser.add_argument('--params', type=str)
+    parser.add_argument('--image', type=str, required=True)
+    parser.add_argument('--params', type=str, required=True)
     parser.add_argument('--crop_face', type=int)
-    parser.add_argument('--model', type=str)
+    parser.add_argument('--model', type=str, required=True)
     parser.add_argument('--folder', type=str)
 
     args = parser.parse_args()
+
     print("Loading model..")
     if args.model == 'mlp':
         model = MLP()
