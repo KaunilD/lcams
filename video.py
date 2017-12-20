@@ -97,8 +97,8 @@ def main():
 
     faceCascade = loadCascades()
     cv2.namedWindow('Video')
-    cap_vid = cv2.VideoCapture(args.video)
-    cap_face = cv2.VideoCapture(0)
+    cap_vid = cv2.VideoCapture(args.video) # video lecture that the user is watching
+    cap_face = cv2.VideoCapture(0) # stream to capture user's session via primary webcam
 
     if cap_vid.isOpened():
         rval_vid, frame_vid  = cap_vid.read()
@@ -124,7 +124,7 @@ def main():
     cap_vid.release()
 
     avg_emotion = np.argmax(history) + 1
-    movie_db = json.load(open('data/db.json'))
+    movie_db = json.load(open('data/db.json')) # suitable lectures as per user's affective state
     logging.info('Overall user was {}, we recommend him : {}'.format(EMOTIONS[avg_emotion-1], movie_db[str(avg_emotion)]))
 
     cv2.destroyAllWindows()
